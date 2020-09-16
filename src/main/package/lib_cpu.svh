@@ -1,0 +1,20 @@
+`ifndef LIB_CPU_SVH
+`define LIB_CPU_SVH
+package lib_cpu;
+    typedef enum logic [3:0] {
+        ADD_A_IMM,
+        ADD_B_IMM,
+        MOV_A_IMM,
+        MOV_B_IMM,
+        MOV_A_B,
+        MOV_B_A,
+        JMP_IMM,
+        JNC_IMM,
+        IN_A,
+        IN_B,
+        OUT_B,
+        OUT_IMM,
+        INVALID        
+    } OPECODE;
+endpackage
+`endif
