@@ -3,8 +3,7 @@
 module cpu import lib_cpu :: *; (
     ctrl_bus_if.master ctrl_bus,
     io_bus_if.master   io_bus,
-    input  logic [7:0] data,
-    output logic [3:0] addr
+    mem_bus_if.master  mem_bus
 );
     logic [3:0] a, next_a;
     logic [3:0] b, next_b;
@@ -30,9 +29,9 @@ module cpu import lib_cpu :: *; (
     
     OPECODE opecode;
     logic [3:0] imm;
-    decoder decoder(.data, .opecode, .imm);
-    assign addr       = ip;
-    assign io_bus.led = out;
+    decoder decoder(.data(mem_bus.data), .opecode, .imm);
+    assign mem_bus.addr = ip;
+    assign io_bus.led   = out;
     
     always_comb begin
         next_a   = a;

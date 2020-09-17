@@ -1,8 +1,7 @@
 module rom(
-    input  logic [3:0] addr,
-    output logic [7:0] data
+    mem_bus_if.slave mem_bus
 );
     logic [7:0] rom_array [16];
     initial $readmemh("rom_data.mem", rom_array);
-    assign data = rom_array[addr];
+    assign mem_bus.data = rom_array[mem_bus.addr];
 endmodule
