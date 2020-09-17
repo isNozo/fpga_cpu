@@ -14,5 +14,9 @@ module top(
     assign ctrl_bus.clk     = clk;
     assign ctrl_bus.n_reset = pin_n_reset;
     
-    mother_board mother_board(.ctrl_bus, .switch(pin_switch), .led(pin_led));
+    io_bus_if #(.WIDTH(4)) io_bus();
+    assign io_bus.switch = pin_switch;
+    assign pin_led       = io_bus.led;
+    
+    mother_board mother_board(.ctrl_bus, .io_bus);
 endmodule

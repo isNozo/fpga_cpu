@@ -2,10 +2,9 @@
 
 module cpu import lib_cpu :: *; (
     ctrl_bus_if.master ctrl_bus,
+    io_bus_if.master   io_bus,
     input  logic [7:0] data,
-    input  logic [3:0] switch,
-    output logic [3:0] addr,
-    output logic [3:0] led
+    output logic [3:0] addr
 );
     logic [3:0] a, next_a;
     logic [3:0] b, next_b;
@@ -32,8 +31,8 @@ module cpu import lib_cpu :: *; (
     OPECODE opecode;
     logic [3:0] imm;
     decoder decoder(.data, .opecode, .imm);
-    assign addr    = ip;
-    assign led     = out;
+    assign addr       = ip;
+    assign io_bus.led = out;
     
     always_comb begin
         next_a   = a;
@@ -51,8 +50,8 @@ module cpu import lib_cpu :: *; (
             MOV_B_A  : next_b   = a;
             JMP_IMM  : next_ip  = imm;
             JNC_IMM  : next_ip  = cf ? ip + 1 : imm;
-            IN_A     : next_a   = switch;
-            IN_B     : next_b   = switch;
+            IN_A     : next_a   = io_bus.switch;
+            IN_B     : next_b   = io_bus.switch;
             OUT_B    : next_out = b;
             OUT_IMM  : next_out = imm;
             default  : ;
