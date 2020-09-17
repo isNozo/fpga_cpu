@@ -1,8 +1,7 @@
 `include "lib_cpu.svh"
 
 module cpu import lib_cpu :: *; (
-    input  logic       clk,
-    input  logic       n_reset,
+    ctrl_bus_if.master ctrl_bus,
     input  logic [7:0] data,
     input  logic [3:0] switch,
     output logic [3:0] addr,
@@ -14,8 +13,8 @@ module cpu import lib_cpu :: *; (
     logic [3:0] ip, next_ip;
     logic [3:0] out, next_out;
     
-    always_ff @(posedge clk) begin
-        if (~n_reset) begin 
+    always_ff @(posedge ctrl_bus.clk) begin
+        if (~ctrl_bus.n_reset) begin 
             a   <= '0;
             b   <= '0;
             cf  <= '0;

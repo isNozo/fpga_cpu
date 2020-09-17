@@ -10,5 +10,9 @@ module top(
         .slow_clock(clk)
     );
     
-    mother_board mother_board(.clk, .n_reset(pin_n_reset), .switch(pin_switch), .led(pin_led));
+    ctrl_bus_if ctrl_bus();
+    assign ctrl_bus.clk     = clk;
+    assign ctrl_bus.n_reset = pin_n_reset;
+    
+    mother_board mother_board(.ctrl_bus, .switch(pin_switch), .led(pin_led));
 endmodule
