@@ -8,12 +8,22 @@ module top(
     
     logic we, busy;
     
-    send_serial send_serial(
+//    send_serial send_serial(
+//        .clk(CLK100MHZ),
+//        .rst(ck_rst),
+//        .data_in,
+//        .data_out(uart_rxd_out),
+//        .we,
+//        .busy
+//    );
+
+    shiftreg_p2s#(.N(8)) (
         .clk(CLK100MHZ),
         .rst(ck_rst),
-        .data_in,
-        .data_out(uart_rxd_out),
         .we,
-        .busy
+        .sin(1'b1),
+        .pin(data_in),
+        .sout(uart_rxd_out)
     );
+
 endmodule
