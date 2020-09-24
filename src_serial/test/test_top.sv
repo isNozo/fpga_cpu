@@ -1,12 +1,9 @@
 `timescale 1ns / 1ps
 
-module test_shiftreg_p2s();
-    logic       clk, rst, we;
-    logic       sin;
-    logic [7:0] pin;
-    logic       sout;
+module test_top();
+    logic clk, rst, uart_rxd_out;
     
-    shiftreg_p2s#(.N(8)) shiftreg_p2s(.*);
+    top top(.*);
     
     always #5 clk = ~clk;
     initial   clk = 1'b0;
@@ -18,16 +15,15 @@ module test_shiftreg_p2s();
     end
     
     initial begin
-        we = 1'b1;
+        top.we = 1'b1;
         #20;
-        we = 1'b0;
+        top.we = 1'b0;
     end
     
-    initial sin = 1'b1;
-    initial pin = 8'b0010_1010;
+    initial top.data_in = 8'b0010_1010;
     
     initial begin
-        #500;
+        #150;
         $finish();
     end
 endmodule
