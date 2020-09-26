@@ -23,7 +23,7 @@ module test_top();
     initial top.data_in = 8'b0010_1010;
     
     initial begin
-        #150;
+        #1000;
         $finish();
     end
 endmodule
