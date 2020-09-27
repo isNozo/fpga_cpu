@@ -15,15 +15,17 @@ module test_top();
     end
     
     initial begin
+        top.we = 1'b0;
+        #50
         top.we = 1'b1;
         #20;
         top.we = 1'b0;
     end
     
-    initial top.data_in = 8'b0010_1010;
+    initial top.data_in = 8'b0101_0011;
     
     initial begin
-        #1000;
+        #500;
         $finish();
     end
 endmodule
