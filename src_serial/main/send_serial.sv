@@ -1,11 +1,10 @@
-module send_serial(
+module send_serial #(parameter WAIT_DIV=868) (
     input  logic       clk, rst,
     input  logic [7:0] data_in,
     output logic       data_out,
     input  logic       we,
     output logic       busy
 );
-    parameter  WAIT_DIV = 3;
     localparam WAIT_LEN = $clog2(WAIT_DIV);
     
     typedef enum {

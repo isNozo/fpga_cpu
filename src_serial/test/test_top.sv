@@ -14,18 +14,18 @@ module test_top();
         rst = 1'b1;
     end
     
+    defparam top.send_serial.WAIT_DIV = 5;
+    initial top.data_in = 8'b0101_0011;
+    
     initial begin
         top.we = 1'b0;
         #50
         top.we = 1'b1;
         #20;
         top.we = 1'b0;
-    end
-    
-    initial top.data_in = 8'b0101_0011;
-    
-    initial begin
-        #500;
-        $finish();
+        
+        wait (top.busy == 1'b0);
+        #20;
+        $finish;
     end
 endmodule
