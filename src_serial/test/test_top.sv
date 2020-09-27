@@ -5,7 +5,7 @@ module test_top();
     
     top top(.*);
     
-    defparam top.send_serial.WAIT_DIV = 5;
+    defparam top.send_serial.WAIT_DIV = 3;
     
     always #5 clk = ~clk;
     initial   clk = 1'b0;
@@ -16,7 +16,7 @@ module test_top();
         rst = 1'b1;
         
         #100;
-        wait (top.busy == 1'b0);
+        wait (top.byte_cnt == 11);
         #100;
         $finish;
     end
