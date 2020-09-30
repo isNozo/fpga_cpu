@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module test_top();
-    logic clk, rst, uart_rxd_out;
+    logic clk, neg_rst, uart_rxd_out;
     
     top top(.*);
     
@@ -11,9 +11,9 @@ module test_top();
     initial   clk = 1'b0;
 
     initial begin
-        rst = 1'b0;
+        neg_rst = 1'b0;
         #10;
-        rst = 1'b1;
+        neg_rst = 1'b1;
         
         #100;
         wait (top.byte_cnt == 11);

@@ -1,6 +1,6 @@
 module top(
     input  logic clk,
-    input  logic rst,
+    input  logic neg_rst,
     output logic uart_rxd_out
 );
     typedef enum {
@@ -13,6 +13,8 @@ module top(
     logic [7:0] data_in;
     logic       we, busy;
     logic [3:0] byte_cnt, n_byte_cnt;
+    
+    assign rst = ~neg_rst;
     
     send_serial send_serial(
         .clk,
@@ -67,7 +69,7 @@ module top(
     end
     
     always_ff @(posedge clk) begin
-        if (~rst) begin
+        if (rst) begin
             st       <= SEND;
             byte_cnt <= 0;
         end else begin
