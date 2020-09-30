@@ -57,7 +57,7 @@ module send_serial #(parameter WAIT_DIV=868) (
     always_ff @(posedge clk) begin
         if (rst) begin
             st       <= IDLE;
-            data     <= 0;
+            data     <= '1;
             wait_cnt <= 0;
             bit_cnt  <= 0;
         end else begin
