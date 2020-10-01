@@ -6,7 +6,7 @@ module cpu import lib_cpu :: *; (
     mem_bus_if.master  mem_bus
 );
     OPECODE opecode;
-    logic [3:0] imm;
+    logic [7:0] imm;
     decoder decoder(.data(mem_bus.data), .opecode, .imm);
     
     REGS current, next;

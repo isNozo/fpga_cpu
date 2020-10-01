@@ -2,7 +2,7 @@
 
 module alu import lib_cpu :: *; (
     input  OPECODE     opecode,
-    input  logic [3:0] imm,
+    input  logic [7:0] imm,
     input  logic [3:0] switch,
     input  REGS        current,
     output REGS        next
@@ -21,8 +21,8 @@ module alu import lib_cpu :: *; (
             MOV_B_A  : next.b   = current.a;
             JMP_IMM  : next.ip  = imm;
             JNC_IMM  : next.ip  = current.cf ? current.ip + 1 : imm;
-            IN_A     : next.a   = switch;
-            IN_B     : next.b   = switch;
+            IN_A     : next.a   = {current.a[7:4], switch};
+            IN_B     : next.b   = {current.b[7:4], switch};
             OUT_B    : next.out = current.b;
             OUT_IMM  : next.out = imm;
             default  : ;

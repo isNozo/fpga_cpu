@@ -2,11 +2,11 @@
 `define LIB_CPU_SVH
 package lib_cpu;
     typedef struct packed {
-        logic [3:0] a, b, ip, out;
+        logic [7:0] a, b, ip, out;
         logic cf;
     } REGS;
     
-    typedef enum logic [3:0] {
+    typedef enum logic [7:0] {
         ADD_A_IMM,
         ADD_B_IMM,
         MOV_A_IMM,
@@ -19,7 +19,7 @@ package lib_cpu;
         IN_B,
         OUT_B,
         OUT_IMM,
-        INVALID        
+        INVALID
     } OPECODE;
 endpackage
 `endif
