@@ -11,8 +11,8 @@ module top(
     );
     
     ctrl_bus_if ctrl_bus();
-    assign ctrl_bus.clk     = clk;
-    assign ctrl_bus.n_reset = pin_n_reset;
+    assign ctrl_bus.clk = clk;
+    assign ctrl_bus.rst = ~pin_n_reset;
     
     io_bus_if #(.WIDTH(4)) io_bus();
     assign io_bus.switch = pin_switch;

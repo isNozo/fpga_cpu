@@ -6,7 +6,7 @@ module write_reg import lib_cpu :: *; (
     output REGS current
 );
     always_ff @(posedge ctrl_bus.clk) begin
-        if (~ctrl_bus.n_reset) current <= '0;
-        else                   current <= next;
+        if (ctrl_bus.rst) current <= '0;
+        else              current <= next;
     end
 endmodule
